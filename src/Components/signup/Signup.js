@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
+import axios from "axios";
 const Signup = () => {
   const [doctorname, setdoctorname] = useState("");
   const [email, setemail] = useState("");
@@ -14,7 +15,9 @@ const Signup = () => {
   const [salary, setsalary] = useState();
   const [education, seteducation] = useState("");
   const [hospitalName, setHospitalname] = useState("");
-  const [gender, setgender] = useState("");
+  const [gender, setgender] = useState("Male");
+  const [specialization, setSpecialization] = useState("");
+  const [diseases, setDiseases] = useState([]);
   const [data, setdata] = useState([
     {
       doctorname: "Nizam",
@@ -48,7 +51,18 @@ const Signup = () => {
     education,
     hospitalName,
     gender,
+    specialization,
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/diseases")
+      .then((resp) => {
+        console.log(resp.data, "diseases");
+        setDiseases(resp.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -65,24 +79,33 @@ const Signup = () => {
       age &&
       country &&
       hospitalName &&
+      specialization &&
       Address !== ""
     ) {
-      console.log(vals);
-      setdoctorname("");
-      seteducation("");
-      setemail("");
-      setgender("");
-      setpassword("");
-      setsalary("");
-      setconfirmpassword("");
-      setdesignation("");
-      setWorkingdays("");
-      setAge("");
-      setCountry("");
-      setHospitalname("");
-      setno("");
-      setAddress("");
-      console.log(data);
+      // post data
+      axios({
+        method: "post",
+        url: "http://localhost:3002/doctors",
+        data: vals,
+      })
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .catch((err) => console.log(err));
+      // setdoctorname("");
+      // seteducation("");
+      // setemail("");
+      // setgender("");
+      // setpassword("");
+      // setsalary("");
+      // setconfirmpassword("");
+      // setdesignation("");
+      // setWorkingdays("");
+      // setAge("");
+      // setCountry("");
+      // setHospitalname("");
+      // setno("");
+      // setAddress("");
     } else {
       alert("Fill out the missing fields");
     }
@@ -227,6 +250,25 @@ const Signup = () => {
                 }}
                 type="text"
               />
+              <br />
+              <label className="mt-3">Specialization</label>
+              <br />
+              <select
+                value={specialization}
+                onChange={(e) => {
+                  setSpecialization(e.target.value);
+                }}
+              >
+                <option value={null}>Select Your Specilization</option>
+                {diseases.length > 0 &&
+                  diseases.map((item, index) => {
+                    return (
+                      <option value={item.diseaseName} key={item.id}>
+                        {item.diseaseName}
+                      </option>
+                    );
+                  })}
+              </select>
               <br />
 
               <button onClick={handleSubmit} className="mt-5 w-75  btn ">
