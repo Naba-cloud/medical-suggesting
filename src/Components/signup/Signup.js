@@ -94,6 +94,7 @@ const Signup = () => {
           console.log(resp.data);
         })
         .catch((err) => console.log(err));
+
       }
       else{
         alert("password and confirm password must be same")
@@ -112,7 +113,7 @@ const Signup = () => {
       setHospitalname("");
       setno("");
       setAddress("");
-      console.log(vals);
+
     } else {
       alert("Fill out the missing fields");
     }
