@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "../signup/Signup.css";
+import useContext from "react"
+import { Context } from "../Context";
+
 const Login = () => {
+  const authContext = useContext(value);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [role, setrole] = useState("Patient");
@@ -74,6 +78,7 @@ const Login = () => {
           <br />
         </div>
       </form>
+     
       <br />
     </>
   );

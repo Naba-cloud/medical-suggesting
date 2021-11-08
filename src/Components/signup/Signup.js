@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Signup.css";
  import axios from "axios";
 const Signup = () => {
+
+
   const [doctorname, setdoctorname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -305,6 +307,7 @@ const Signup = () => {
             </div>
           </div>
           <br />
+       
         </form>
       </div>
     </>
