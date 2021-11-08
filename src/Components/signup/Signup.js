@@ -91,7 +91,9 @@ const Signup = () => {
           data: vals,
         })
           .then((resp) => {
-            console.log(resp.data);
+            if (resp.data.status === "success") {
+              alert("Doctor Registered Successfully!");
+            }
           })
           .catch((err) => console.log(err));
       } else {
