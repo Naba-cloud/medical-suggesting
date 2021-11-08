@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import Layout from "./layout/routes";
-
+import Layout from "./layout/routes"
 function App() {
   return (
     <div className="App">

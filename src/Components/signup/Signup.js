@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Signup.css";
-import axios from "axios";
+ import axios from "axios";
 const Signup = () => {
   const [doctorname, setdoctorname] = useState("");
   const [email, setemail] = useState("");
@@ -66,7 +66,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      doctorname &&
+      (doctorname &&
       education &&
       email &&
       password &&
@@ -79,10 +79,12 @@ const Signup = () => {
       age &&
       country &&
       hospitalName &&
-      specialization &&
-      Address !== ""
+      // specialization &&
+      Address !== "") 
     ) {
-      // post data
+     // post data
+     if(password==confirmpassword)
+     {
       axios({
         method: "post",
         url: "http://localhost:3002/doctors",
@@ -92,10 +94,15 @@ const Signup = () => {
           console.log(resp.data);
         })
         .catch((err) => console.log(err));
+
+      }
+      else{
+        alert("password and confirm password must be same")
+      }
       setdoctorname("");
       seteducation("");
       setemail("");
-      setgender("");
+      // setgender("");
       setpassword("");
       setsalary("");
       setconfirmpassword("");
@@ -106,6 +113,7 @@ const Signup = () => {
       setHospitalname("");
       setno("");
       setAddress("");
+
     } else {
       alert("Fill out the missing fields");
     }
@@ -133,6 +141,7 @@ const Signup = () => {
                   setdoctorname(e.target.value);
                 }}
                 type="text"
+                value={doctorname}
               />
               <br />
               <label className="mt-3">Email</label>
@@ -142,6 +151,7 @@ const Signup = () => {
                   setemail(e.target.value);
                 }}
                 type="email"
+                value={email}
               />
               <br />
               <label className="mt-3">Password</label>
@@ -151,6 +161,7 @@ const Signup = () => {
                   setpassword(e.target.value);
                 }}
                 type="password"
+                value={password}
               />
               <br />
               <label className="mt-3">Confirm Password</label>
@@ -158,6 +169,7 @@ const Signup = () => {
               <input
                 onChange={(e) => setconfirmpassword(e.target.value)}
                 type="password"
+                value={confirmpassword}
               />
               <br />
               <label className="mt-3">PhoneNumber</label>
@@ -167,6 +179,7 @@ const Signup = () => {
                   setno(e.target.value);
                 }}
                 type="number"
+                value={no}
               />
               <br />
               <label className="mt-3">Age</label>
@@ -176,6 +189,7 @@ const Signup = () => {
                   setAge(e.target.value);
                 }}
                 type="number"
+                value={age}
               />
               <br />
               <label className="mt-3">Country</label>
@@ -185,6 +199,7 @@ const Signup = () => {
                   setCountry(e.target.value);
                 }}
                 type="text"
+                value={country}
               />
               <br />
               <label className="mt-3">Address</label>
@@ -194,6 +209,7 @@ const Signup = () => {
                   setAddress(e.target.value);
                 }}
                 type="text"
+                value={Address}
               />
               <br />
               <label className="mt-3">Gender</label>
@@ -203,6 +219,7 @@ const Signup = () => {
                 onChange={(e) => {
                   setgender(e.target.value);
                 }}
+                value={gender}
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -215,6 +232,7 @@ const Signup = () => {
                   setdesignation(e.target.value);
                 }}
                 type="text"
+                value={designation}
               />
               <br />
               <label className="mt-3">Working Days</label>
@@ -222,6 +240,7 @@ const Signup = () => {
               <input
                 onChange={(e) => setWorkingdays(e.target.value)}
                 type="number"
+                value={workingDays}
               />
               <br />
               <label className="mt-3">Salary</label>
@@ -231,6 +250,7 @@ const Signup = () => {
                   setsalary(e.target.value);
                 }}
                 type="number"
+                value={salary}
               />
               <br />
               <label className="mt-3">Education</label>
@@ -240,6 +260,7 @@ const Signup = () => {
                   seteducation(e.target.value);
                 }}
                 type="text"
+                value={education}
               />
               <br />
               <label className="mt-3">Hospital Name </label>
@@ -247,8 +268,10 @@ const Signup = () => {
               <input
                 onChange={(e) => {
                   setHospitalname(e.target.value);
+
                 }}
                 type="text"
+                value={hospitalName}
               />
               <br />
               <label className="mt-3">Specialization</label>

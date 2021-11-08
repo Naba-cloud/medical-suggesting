@@ -12,11 +12,17 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(email && password !=="")
+    {
     setdata([...data, value]);
     setemail("");
     setpassword("");
     // setrole("");
     console.log(value);
+    }
+    else{
+      alert("Fill Out The Missing Fields");
+    }
   };
 
   return (
