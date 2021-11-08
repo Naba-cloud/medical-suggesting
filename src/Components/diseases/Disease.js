@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./Disease.css";
+import { AppContext } from "../Context";
+import { useNavigate } from "react-router-dom";
 const Disease = () => {
   const [disease, setDisease] = useState([]);
+  const Navigate = useNavigate();
 
-  const data = {
-    docname: "efg",
-    email: "abcd@gmail.com",
-    phoneNumber: "0900876541",
-    address: "c-33 park hill karachi",
-    hospital: "GHQ",
-  };
+  const { handleSetDoctors, user } = useContext(AppContext);
   function getDisease(e) {
-    console.log(e.target.value);
-    //    setdummyData([data]);
-    console.log(data);
+    axios
+      .get(`http://localhost:3002/get-specialist/${e.target.value}`)
+      .then((resp) => {
+        console.log(resp.data);
+        handleSetDoctors(resp.data.data);
+        Navigate("/specialist-doctors");
+      });
   }
   useEffect(() => {
     axios.get("http://localhost:3002/diseases").then((resp) => {
