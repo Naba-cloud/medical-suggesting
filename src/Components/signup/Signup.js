@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Signup.css";
- import axios from "axios";
+import Navbar from "../Navbar/Navbar";
+import axios from "axios";
 const Signup = () => {
 
 
@@ -68,7 +69,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      (doctorname &&
+      doctorname &&
       education &&
       email &&
       password &&
@@ -82,24 +83,23 @@ const Signup = () => {
       country &&
       hospitalName &&
       // specialization &&
-      Address !== "") 
+      Address !== ""
     ) {
-     // post data
-     if(password==confirmpassword)
-     {
-      axios({
-        method: "post",
-        url: "http://localhost:3002/doctors",
-        data: vals,
-      })
-        .then((resp) => {
-          console.log(resp.data);
+      // post data
+      if (password == confirmpassword) {
+        axios({
+          method: "post",
+          url: "http://localhost:3002/doctors",
+          data: vals,
         })
-        .catch((err) => console.log(err));
-
-      }
-      else{
-        alert("password and confirm password must be same")
+          .then((resp) => {
+            if (resp.data.status === "success") {
+              alert("Doctor Registered Successfully!");
+            }
+          })
+          .catch((err) => console.log(err));
+      } else {
+        alert("password and confirm password must be same");
       }
       setdoctorname("");
       seteducation("");
@@ -115,14 +115,14 @@ const Signup = () => {
       setHospitalname("");
       setno("");
       setAddress("");
-
     } else {
       alert("Fill out the missing fields");
     }
   };
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid p-0">
+        <Navbar />
         <form className="mx-auto w-50 frm mt-5 ">
           <div className="row">
             <div className="col-lg-12  ">
@@ -270,7 +270,6 @@ const Signup = () => {
               <input
                 onChange={(e) => {
                   setHospitalname(e.target.value);
-
                 }}
                 type="text"
                 value={hospitalName}
