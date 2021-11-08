@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "../signup/Signup.css";
+
 import useContext from "react"
 import { Context } from "../Context";
+import Navbar from "../Navbar/Navbar";
+import axios from "axios";
 
 const Login = () => {
   const authContext = useContext(value);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [role, setrole] = useState("Patient");
+  const [role, setrole] = useState("patient");
   const [data, setdata] = useState([{ email: "", password: "" }]);
   const value = {
     email,
@@ -16,21 +19,27 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(email && password !=="")
-    {
-    setdata([...data, value]);
-    setemail("");
-    setpassword("");
-    // setrole("");
-    console.log(value);
-    }
-    else{
+    if (email && password !== "") {
+      setdata([...data, value]);
+      setemail("");
+      setpassword("");
+      // setrole("");
+      console.log(value);
+      axios({
+        method: "post",
+        url: "http://localhost:3002/login",
+        data: value,
+      }).then((resp) => {
+        console.log(resp.data);
+      });
+    } else {
       alert("Fill Out The Missing Fields");
     }
   };
 
   return (
     <>
+      <Navbar />
       <form className="mx-auto w-50 frm mt-5 h-75 ">
         <div className="row">
           <div className="col-lg-12  ">
@@ -67,8 +76,8 @@ const Login = () => {
                 setrole(e.target.value);
               }}
             >
-              <option value="Patient">Patient</option>
-              <option value="Doctor">Doctor</option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
             </select>
             <button onClick={handleSubmit} className="mt-5 btn">
               Login
