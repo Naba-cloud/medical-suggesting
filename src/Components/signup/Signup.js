@@ -92,20 +92,20 @@ const Signup = () => {
           console.log(resp.data);
         })
         .catch((err) => console.log(err));
-      // setdoctorname("");
-      // seteducation("");
-      // setemail("");
-      // setgender("");
-      // setpassword("");
-      // setsalary("");
-      // setconfirmpassword("");
-      // setdesignation("");
-      // setWorkingdays("");
-      // setAge("");
-      // setCountry("");
-      // setHospitalname("");
-      // setno("");
-      // setAddress("");
+      setdoctorname("");
+      seteducation("");
+      setemail("");
+      setgender("");
+      setpassword("");
+      setsalary("");
+      setconfirmpassword("");
+      setdesignation("");
+      setWorkingdays("");
+      setAge("");
+      setCountry("");
+      setHospitalname("");
+      setno("");
+      setAddress("");
     } else {
       alert("Fill out the missing fields");
     }
