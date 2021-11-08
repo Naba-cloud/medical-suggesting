@@ -3,6 +3,8 @@ import "./Signup.css";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 const Signup = () => {
+
+
   const [doctorname, setdoctorname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -304,6 +306,7 @@ const Signup = () => {
             </div>
           </div>
           <br />
+       
         </form>
       </div>
     </>
