@@ -6,9 +6,11 @@ nav ul {
   display: flex;
   justify-content: flex-start;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 nav ul li {
+  width: 100px;
   margin: 0 1rem;
   padding: 1rem;
 }
