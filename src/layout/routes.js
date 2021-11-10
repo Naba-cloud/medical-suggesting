@@ -10,6 +10,7 @@ import AllDoctors from "../Components/Admin/AllDoctors";
 import DoctorsDetails from "../Components/Admin/DoctorDetails";
 import AllPatients from "../Components/Admin/AllPatients";
 import PatientDetails from "../Components/Admin/PatientDetails";
+// import Patients from "../Components/Patients/Patients"
 
 const Layout = () => {
   return (
@@ -26,6 +27,7 @@ const Layout = () => {
       <Route path="/doctor-details" element={<DoctorsDetails />} />
       <Route path="/all-patients" element={<AllPatients />} />
       <Route path="/patient-details" element={<PatientDetails />} />
+      {/* <Route path="/patient-register" element={<Patients/>} */}
     </Routes>
   );
 };
