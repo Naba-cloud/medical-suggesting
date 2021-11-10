@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../signup/Signup.css";
+import Swal from "sweetalert2";
 
-import useContext from "react"
-import { Context } from "../Context";
+import { AppContext } from "../Context";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const authContext = useContext(value);
+  const { handleSetUser } = useContext(AppContext);
+  const navigate = useNavigate();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [role, setrole] = useState("patient");
@@ -21,8 +23,7 @@ const Login = () => {
     e.preventDefault();
     if (email && password !== "") {
       setdata([...data, value]);
-      setemail("");
-      setpassword("");
+
       // setrole("");
       console.log(value);
       axios({
@@ -31,6 +32,18 @@ const Login = () => {
         data: value,
       }).then((resp) => {
         console.log(resp.data);
+        if (resp.data.status === "success") {
+          handleSetUser(resp.data.data[0]);
+          navigate("/disease");
+          setemail("");
+          setpassword("");
+        } else if (resp.data.status === "error") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Invalid Credentials!",
+          });
+        }
       });
     } else {
       alert("Fill Out The Missing Fields");
@@ -87,7 +100,7 @@ const Login = () => {
           <br />
         </div>
       </form>
-     
+
       <br />
     </>
   );

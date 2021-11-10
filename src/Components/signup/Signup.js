@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
+import Swal from "sweetalert2";
 const Signup = () => {
-
-
   const [doctorname, setdoctorname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -94,27 +93,32 @@ const Signup = () => {
         })
           .then((resp) => {
             if (resp.data.status === "success") {
-              alert("Doctor Registered Successfully!");
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Doctor Added Successfully",
+              }).then((resp) => {
+                setdoctorname("");
+                seteducation("");
+                setemail("");
+                // setgender("");
+                setpassword("");
+                setsalary("");
+                setconfirmpassword("");
+                setdesignation("");
+                setWorkingdays("");
+                setAge("");
+                setCountry("");
+                setHospitalname("");
+                setno("");
+                setAddress("");
+              });
             }
           })
           .catch((err) => console.log(err));
       } else {
         alert("password and confirm password must be same");
       }
-      setdoctorname("");
-      seteducation("");
-      setemail("");
-      // setgender("");
-      setpassword("");
-      setsalary("");
-      setconfirmpassword("");
-      setdesignation("");
-      setWorkingdays("");
-      setAge("");
-      setCountry("");
-      setHospitalname("");
-      setno("");
-      setAddress("");
     } else {
       alert("Fill out the missing fields");
     }
@@ -306,7 +310,6 @@ const Signup = () => {
             </div>
           </div>
           <br />
-       
         </form>
       </div>
     </>
