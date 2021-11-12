@@ -93,7 +93,7 @@ const PatientpatientDetails = () => {
             style={{ padding: "10px", borderRadius: "5px", width: "100px" }}
             onClick={() => Navigator("/all-patients")}
           >
-            Back
+            Backj
           </button>
           <button
             type="button"
